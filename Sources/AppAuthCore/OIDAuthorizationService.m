@@ -117,6 +117,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)shouldHandleURL:(NSURL *)URL {
+  // Check if the URL host is "oauth2-redirect"
+  if ([URL.host isEqualToString:@"oauth2-redirect"]) {
+    return YES;
+  }
+
   return [[self class] URL:URL matchesRedirectionURL:_request.redirectURL];
 }
 
@@ -247,6 +252,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (BOOL)shouldHandleURL:(NSURL *)URL {
+  // Check if the URL host is "oauth2-redirect"
+  if ([URL.host isEqualToString:@"oauth2-redirect"]) {
+    return YES;
+  }
+
   // The logic of when to handle the URL is the same as for authorization requests: should match
   // down to the path component.
   return [[OIDAuthorizationSession class] URL:URL
